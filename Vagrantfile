@@ -40,7 +40,12 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     # end
 
     # Finally, let's kick off all of the "build" scripts we want...
-    # We can write them with Ruby and require that shit, as in:
+    node.vm.provision :shell, :inline => "yum install git"
+
+    # We can run a shell script specific to CentOS:
+    # config.vm.provision :shell, :path => "bootstrap.sh"
+
+    # We can also write them with Ruby and require that shit, as in:
     #
     # require File.join(File.dirname(__FILE__),'lib/foo.rb')
     # node.vm.provision :shell, :inline => Foo.openports_centos

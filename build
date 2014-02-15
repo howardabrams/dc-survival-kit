@@ -1,0 +1,33 @@
+#!/bin/sh
+#  ----------------------------------------------------------------------
+#  Run this script with the 'destination' for all of the binaries.
+#  This defaults to my home directory on the remote syste, but if you
+#  want it useable by root, pass in: /root
+#  ----------------------------------------------------------------------
+export INSTALL_HOME=${1:-"/home/howard.abrams"}
+
+# Let's just make sure we can write into the destination directory
+mkdir -p $INSTALL_HOME || exit 1
+
+# The rest of this script is just one && chain so that we can bail
+# out at any point without continuing. Good idea? Not sure.
+
+# Copy some obvious stuff...
+cp $HOME/dc-survival-kit/.profile $INSTALL_HOME && \
+cp $HOME/dc-survival-kit/.emacs $INSTALL_HOME && \
+cp $HOME/dc-survival-kit/.tmux.conf $INSTALL_HOME && \
+cp $HOME/dc-survival-kit/.screenrc $INSTALL_HOME && \
+
+# The INSTALL_HOME argument will be passed to all
+# of the following scripts so that they can use it...
+
+$HOME/dc-survival-kit/do-node.sh && \
+$HOME/dc-survival-kit/do-emacs.sh && \
+$HOME/dc-survival-kit/do-emacs-d.sh && \
+# $HOME/dc-survival-kit/do-tmux.sh
+
+# Now, collect the results.
+cd $INSTALL_HOME && \
+tar cfz $HOME/dc-survival-kit/survival-kit.tgz \
+    .profile .tmux.conf .screenrc  emacs .emacs .emacs.d \
+    node .npm

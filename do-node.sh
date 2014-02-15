@@ -2,9 +2,9 @@
 
 VERSION=0.10.25
 SRC=~/src
-DEST=~/node
+DEST=$INSTALL_HOME/node
 
-if [ ! -d $SRC/emacs-$VERSION ]
+if [ ! -d $SRC/node-v$VERSION ]
 then
     mkdir -p $SRC
     cd $SRC
@@ -16,10 +16,11 @@ fi
 mkdir -p $DEST    # We will install it here
 
 cd $SRC/node-v$VERSION
-./configure --prefix ~/node
+./configure clean
+./configure --prefix $DEST
 make && make install
 
 # Seems like at this point, we should change the PATH in ~/.profile
 # to include $HOME/node/bin
 
-$DEST/bin/npm install -g underscore-cli
+HOME=$INSTALL_HOME $DEST/bin/npm install -g underscore-cli

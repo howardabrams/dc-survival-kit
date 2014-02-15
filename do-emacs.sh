@@ -2,7 +2,7 @@
 
 VERSION=24.3
 SRC=~/src
-DEST=~/emacs
+DEST=$INSTALL_HOME/emacs
 
 if [ ! -d $SRC/emacs-$VERSION ]
 then
@@ -15,7 +15,8 @@ fi
 mkdir -p $DEST    # We will install it here
 
 cd $SRC/emacs-$VERSION
-./configure --prefix ~/emacs --without-gui
+./configure clean
+./configure --prefix $DEST --without-gui
 make && make install
 
 # Seems like at this point, we should change the PATH in ~/.profile
