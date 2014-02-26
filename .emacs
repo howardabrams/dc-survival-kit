@@ -664,15 +664,14 @@ e.g. jquery|appendTo searches only the files with a 'jquery' tag."
 (if after-init-time (sml/setup)
   (add-hook 'after-init-hook 'sml/setup))
 
-(custom-set-variables '(sml/active-background-color "dark blue"))
+(custom-set-variables '(sml/active-background-color "red")
+                      '(sml/inactive-background-color "blue"))
 
 ;; Especially since you can limit the pathname of the displayed
 ;;     filename.
 
-(add-to-list 'sml/replacer-regexp-list '("^~/Google Drive/" ":Goo:"))
-(add-to-list 'sml/replacer-regexp-list '("^~/Other/dot-files" ":.:"))
-(add-to-list 'sml/replacer-regexp-list '("^~/Work/wpc-api/server/" ":API:"))
-(add-to-list 'sml/replacer-regexp-list '("^~/Work/wpc-fai/ci/" ":CI:"))
+(add-to-list 'sml/replacer-regexp-list '("^~/wpc-api/server/" ":API:"))
+(add-to-list 'sml/replacer-regexp-list '("^~/wpc-ci/" ":CI:"))
 
 ;; Hiding some Minor modes in the mode line is real swell. This
 ;;     leaves the mode-line with only important stuff.
